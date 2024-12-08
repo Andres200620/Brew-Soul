@@ -1,5 +1,6 @@
 package com.example.brewsoul
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class HomePageViewModel: ViewModel() {
@@ -19,7 +20,9 @@ class HomePageViewModel: ViewModel() {
     var mochaCoffeQuantity = 0
     var mochaCoffeAmount = 300
 
-    var grandTotal = 0
+   val grandTotalLiveData : MutableLiveData<Int> by lazy {
+       MutableLiveData<Int>()
+   }
 
 
     fun incrementCountButton1(){
@@ -62,6 +65,9 @@ class HomePageViewModel: ViewModel() {
         mochaCoffeQuantity -=1
     }
 
+
+
+
     fun grandTotal(){
         val c1Total = expCoffeAmount * expCoffeQuantity
         val c2Total = capCoffeAmount * capCoffeQuantity
@@ -70,6 +76,6 @@ class HomePageViewModel: ViewModel() {
         val c5Total = mochaCoffeAmount * mochaCoffeQuantity
 
 
-        grandTotal = c1Total + c2Total + c3Total + c4Total + c5Total
+        grandTotalLiveData.value = c1Total + c2Total + c3Total + c4Total + c5Total
     }
 }

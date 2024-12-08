@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.brewsoul.databinding.FragmentHomePageBinding
 
@@ -103,8 +104,16 @@ class HomePageFragment : Fragment() {
             updateLatestValues()
         }
 
+      observesData()
+
     }
 
+    fun observesData(){
+
+        viewModel.grandTotalLiveData.observe(viewLifecycleOwner){ value ->
+            _binding.grandTotal.text = value.toString()
+        }
+    }
 
     fun updateLatestValues() {
 
@@ -123,7 +132,7 @@ class HomePageFragment : Fragment() {
         _binding.c5.productAmount5.text = viewModel.mochaCoffeAmount.toString()
         _binding.c5.mochaCoffeQuantity.text = viewModel.mochaCoffeQuantity.toString()
 
-        _binding.grandTotal.text = viewModel.grandTotal.toString()
+
 
     }
 
